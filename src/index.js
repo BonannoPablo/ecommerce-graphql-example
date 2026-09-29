@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
+const { ApolloServerPluginLandingPageLocalDefault } = require("@apollo/server/plugin/landingPage/default");
 const connectDB = require("./db");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
@@ -17,6 +18,9 @@ async function startServer() {
     typeDefs,
     resolvers,
     introspection: true,
+    plugins: [
+      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+    ],
   });
 
   await server.start();
