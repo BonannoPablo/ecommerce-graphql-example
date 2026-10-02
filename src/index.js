@@ -7,8 +7,12 @@ const { ApolloServerPluginLandingPageLocalDefault } = require("@apollo/server/pl
 const connectDB = require("./db");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
+const dns = require('dns');
 
 async function startServer() {
+  
+  dns.setServers(['1.1.1.1', '8.8.8.8']);
+
   await connectDB();
 
   const app = express();
